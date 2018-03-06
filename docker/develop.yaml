@@ -1,0 +1,36 @@
+version: '2'
+services:
+
+  backend:
+    image: docker.saritasa.com/training-backend:develop
+    hostname: training-dev
+    container_name: training-develop
+    mem_limit: 536870912
+    expose:
+    - 80
+    environment:
+    - APP_ENV=development
+    labels:
+      io.rancher.container.network: 'true'
+      io.rancher.container.pull_image: always
+      SERVICE_TAGS: traefik.frontend.rule=Host:training.saritasa-hosting.com,traefik.tags=app,traefik.web.loadbalancer=drr
+      SERVICE_NAME: training-backend-develop
+    stdin_open: true
+    tty: true
+
+  mockserver:
+    image: docker.saritasa.com/alpine-mockserver:0.6
+    hostname: training-mockserver
+    container_name: training-mockserver
+    mem_limit: 536870912
+    expose:
+    - 8000
+    environment:
+    - SWAGGER_FILE_URL=https://apidocs.saritasa-hosting.com/training/develop/training-latest.yaml
+    labels:
+      io.rancher.container.network: 'true'
+      io.rancher.container.pull_image: always
+      SERVICE_TAGS: traefik.frontend.rule=Host:training-mockserver.saritasa-hosting.com,traefik.tags=app,traefik.web.loadbalancer=drr
+      SERVICE_NAME: training-mockserver
+    stdin_open: true
+    tty: true
