@@ -11,11 +11,8 @@
 |
 */
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MarkupController;
-use Saritasa\Laravel\Controllers\Web\WebResourceRegistrar;
-
 $router = app('router');
-$web = new WebResourceRegistrar($router);
 
-$web->get('/', HomeController::class, 'index');
+$router->get('{path}', function () {
+    return view('spa');
+})->where('path', '(.*)');

@@ -1,20 +1,26 @@
 // import all pages for our main bundle
-import { FormHelpers } from 'vue-laravel-forms';
 import VeeValidate from 'vee-validate';
 import Vue from 'vue';
-import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
-import $ from 'jquery';
+import App from 'vues/layout/app.vue';
+import Store from './store/store';
+import routes from './routes/routes';
 import './utils';
-import './pages/logoutComponent';
 
-window.jQuery = $;
-Vue.use(VueResource);
 Vue.use(VueRouter);
-Vue.use(FormHelpers);
 Vue.use(VeeValidate);
 
-Vue.http.options.showLoading = true; // Set option to show loading shadow by default
-Vue.http.options.emulateHTTP = true;
-// Add header with CSRF token to all requests`
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+const router = new VueRouter({
+  mode: 'history',
+  base: window.location.pathName,
+  routes,
+});
+
+window.vue = new Vue({
+  el: '#app',
+  store: Store,
+  render(h) {
+    return h(App);
+  },
+  router,
+});
