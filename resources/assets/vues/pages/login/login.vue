@@ -46,9 +46,7 @@
     },
     methods: {
       sendRequest() {
-        AuthService.login(this.email, this.password, this.rememberMe).catch(() => {
-          console.log('test');
-        });
+        AuthService.login(this.email, this.password);
       },
     },
     computed: {},

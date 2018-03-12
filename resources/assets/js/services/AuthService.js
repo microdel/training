@@ -1,19 +1,22 @@
-import HTTP from './../http/http-common';
+import router from 'js/routes/router';
+import store from 'js/store/store';
+import { HOME_PAGE } from '../routes/routes';
+import AuthResource from '../http/resources';
+import { LOGIN_MUTATION, LOGOUT_MUTATION } from '../store/mutations-types';
 
-class AuthService {
-  constructor(http) {
-    this.http = http;
-  }
+export default {
+  authResource: AuthResource,
 
-  login(email, password, rememberMe) {
-    return this.http.request({
-      url: '/test',
-      method: 'post',
-      data: { email, password, rememberMe },
-    }).then(() => {
-      console.log('tesssssss');
+  login(email, password) {
+    return this.authResource.login({ email, password }).then((response) => {
+      store.commit(LOGIN_MUTATION, response.body.token);
+      router.push(HOME_PAGE);
+    }).catch((response) => {
+      console.log(response);
     });
-  }
-}
+  },
 
-export default new AuthService(HTTP);
+  logout() {
+    store.commit(LOGOUT_MUTATION);
+  },
+};

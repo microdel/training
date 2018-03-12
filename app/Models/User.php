@@ -6,6 +6,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Notifications\Notifiable;
 use Saritasa\Database\Eloquent\Models\User as BaseUserModel;
 use Saritasa\Enums\Gender;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Application User
@@ -38,7 +39,7 @@ use Saritasa\Enums\Gender;
  * @method static Builder|User whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class User extends BaseUserModel
+class User extends BaseUserModel implements JWTSubject
 {
     use Notifiable;
 
@@ -51,4 +52,24 @@ class User extends BaseUserModel
     protected $defaults = [
         'avatar_url' => self::DEFAULT_AVATAR
     ];
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
