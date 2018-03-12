@@ -16,6 +16,9 @@ export default [
     path: FORM_PAGE,
     name: 'form',
     component: form,
+    meta: {
+      requireLogin: true,
+    },
   },
   {
     path: LOGIN_PAGE,

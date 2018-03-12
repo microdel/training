@@ -24,14 +24,14 @@
                         <a>Form</a>
                     </router-link>
 
-                    <router-link tag="li" active-class="active" :to="{ name: 'login' }" exact>
-                        <a>Login</a>
-                    </router-link>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    Login
+                    <template v-if="!isAuth">
+                        <router-link tag="li" active-class="active" :to="{ name: 'login' }" exact>
+                            <a>Login</a>
+                        </router-link>
+                    </template>
+                    <template v-else>
+                        <li><a href="javascript:;" @click="logout">Logout</a></li>
+                    </template>
                 </ul>
 
             </div>
@@ -40,8 +40,19 @@
 </template>
 
 <script>
+  import AuthService from 'js/services/AuthService';
+
   export default {
     props: {},
-    methods: {},
+    methods: {
+      logout() {
+        AuthService.logout();
+      },
+    },
+    computed: {
+      isAuth() {
+        return AuthService.isAuthenticated();
+      },
+    },
   };
 </script>
