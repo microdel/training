@@ -11,7 +11,7 @@ use Saritasa\Database\Eloquent\Entity as Eloquent;
  * @property int $car_model_id
  * @property string $name
  *
- * @property \App\Models\CarModel $car_model
+ * @property \App\Models\CarModel $carModel
  * @property \Illuminate\Database\Eloquent\Collection $years
  *
  * @package App\Models

@@ -11,7 +11,7 @@ use Saritasa\Database\Eloquent\Entity as Eloquent;
  * @property int $make_id
  * @property string $name
  *
- * @property \App\Models\Make $make
+ * @property \App\Models\Make $carMake
  * @property \Illuminate\Database\Eloquent\Collection $trims
  * @property \Illuminate\Database\Eloquent\Collection $years
  *

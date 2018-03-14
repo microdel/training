@@ -10,7 +10,7 @@ use Saritasa\Database\Eloquent\Entity as Eloquent;
  * @property int $id
  * @property string $name
  *
- * @property \Illuminate\Database\Eloquent\Collection $car_models
+ * @property \Illuminate\Database\Eloquent\Collection $carModels
  *
  * @package App\Models
  */

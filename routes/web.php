@@ -13,6 +13,4 @@
 
 $router = app('router');
 
-$router->get('{path}', function () {
-    return view('spa');
-})->where('path', '(.*)');
+$router->get('{path}', 'IndexController@index')->where('path', '(.*)');

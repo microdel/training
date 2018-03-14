@@ -11,6 +11,10 @@
 |
 */
 
+/**
+ * @var \Illuminate\Database\Eloquent\Factory $factory
+ */
+
 $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
@@ -18,5 +22,29 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
         'email' => $faker->safeEmail,
         'password' => '123456',
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(\App\Models\Make::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->company
+    ];
+});
+
+$factory->define(\App\Models\CarModel::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(\App\Models\Trim::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(\App\Models\Year::class, function () {
+    return [
+        'value' => rand(1900, date('Y'))
     ];
 });
