@@ -16,11 +16,11 @@ use Dingo\Api\Routing\Router;
 /* @var Router $api */
 $api = app(Router::class);
 
-$api->version(config('api.version'), ['namespace' => 'App\Http\Controllers\Api\v1'], function (Router $api) {
+$api->version(config('api.version'), ['namespace' => 'App\Http\Controllers\Api\v1', 'middleware' => ['api', 'guard.change:api']], function (Router $api) {
 
     $api->post('auth', 'AuthApiController@login');
     $api->put('auth', 'AuthApiController@refreshToken');
-    $api->delete('auth', 'AuthApiController@logout')->middleware('api.auth');
+    $api->delete('auth', 'AuthApiController@logout')->middleware('api.auth:api');
 
     $api->post('auth/password/reset', 'ForgotPasswordApiController@sendResetLinkEmail');
     $api->put('auth/password/reset', 'ResetPasswordApiController@reset');

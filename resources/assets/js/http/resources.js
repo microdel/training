@@ -15,4 +15,9 @@ const authResource = Vue.resource('auth', {}, {
   setPassword: { method: 'PUT', url: 'auth/password' },
 });
 
-export default authResource;
+const bodyTypesResource = Vue.resource('dictionaries/body-types');
+
+export {
+  authResource,
+  bodyTypesResource,
+};

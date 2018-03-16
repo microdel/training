@@ -20,8 +20,8 @@
                         <a>Home</a>
                     </router-link>
 
-                    <router-link tag="li" active-class="active" :to="{ name: 'form' }" exact>
-                        <a>Form</a>
+                    <router-link tag="li" active-class="active" :to="{ name: 'order' }" exact>
+                        <a>Order</a>
                     </router-link>
 
                     <template v-if="!isAuth">

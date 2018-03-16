@@ -4,6 +4,7 @@ import Vue from 'vue';
 import App from 'vues/layout/app.vue';
 import Store from './store/store';
 import router from './routes/router';
+import './http/interceptors';
 import './utils';
 
 Vue.use(VeeValidate);
