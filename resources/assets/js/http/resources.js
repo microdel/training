@@ -16,8 +16,16 @@ const authResource = Vue.resource('auth', {}, {
 });
 
 const bodyTypesResource = Vue.resource('dictionaries/body-types');
+const makesResource = Vue.resource('dictionaries/makes');
+const modelsResource = Vue.resource('dictionaries/makes{/makeId}/models');
+const yearsResource = Vue.resource('dictionaries/models{/modelId}/years');
+const trimsResource = Vue.resource('dictionaries/years{/yearId}/trims');
 
 export {
   authResource,
   bodyTypesResource,
+  makesResource,
+  modelsResource,
+  yearsResource,
+  trimsResource,
 };
