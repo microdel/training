@@ -1,10 +1,10 @@
 <template>
     <div>
-        <page-form></page-form>
+        <page-form ref="form"></page-form>
 
         <div class="row mt10">
             <div class="col-md-12">
-                <button class="btn btn-primary">Send</button>
+                <button class="btn btn-primary" @click="sendForm">Send</button>
             </div>
         </div>
     </div>
@@ -18,6 +18,16 @@
       PageForm,
     },
     props: {},
-    methods: {},
+    methods: {
+      sendForm() {
+        const { form } = this.$refs;
+
+        form.validate().then((valid) => {
+          if (valid) {
+            console.log(form.formData);
+          }
+        });
+      },
+    },
   };
 </script>
