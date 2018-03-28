@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  import OrdersService from 'js/services/OrdersService';
+  import AuthService from 'js/services/AuthService';
   import PageForm from './form.vue';
 
   export default {
@@ -24,9 +26,21 @@
 
         form.validate().then((valid) => {
           if (valid) {
-            console.log(form.formData);
+            const data = form.formData;
+
+            OrdersService.createOrder({
+              vin: data.vin,
+              body_type_id: data.bodyType,
+              make_id: data.make,
+              model_id: data.model,
+              year_id: data.year,
+              trim_id: data.trim,
+            });
           }
         });
+      },
+      refreshToken() {
+        AuthService.refreshToken();
       },
     },
   };

@@ -42,4 +42,6 @@ $api->version(config('api.version'), ['namespace' => 'App\Http\Controllers\Api\v
         // Trims
         $api->get('years/{id}/trims', 'TrimsController@getTrimsForSelection')->where('id', '\d+');
     });
+
+    $api->post('orders', 'OrdersController@createOrder')->middleware('api.auth:api');
 });

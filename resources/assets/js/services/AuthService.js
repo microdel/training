@@ -14,8 +14,18 @@ export default {
    */
   login(email, password) {
     return authResource.login({ email, password }).then((response) => {
-      store.commit(LOGIN_MUTATION, response.body.token);
+      this.saveToken(response.body.token);
       router.push(HOME_PAGE);
+    });
+  },
+
+  /**
+   * Refreshes the auth token.
+   */
+  refreshToken() {
+    return authResource.refreshToken().then((response) => {
+      this.saveToken(response.body.token);
+      return response.body.token;
     });
   },
 
@@ -24,9 +34,18 @@ export default {
    */
   logout() {
     authResource.logout().then(() => {
-      this.removeToken();
       router.push(HOME_PAGE);
     });
+    this.removeToken();
+  },
+
+  /**
+   * Saves the token to the storage.
+   *
+   * @param {string} token
+   */
+  saveToken(token) {
+    store.commit(LOGIN_MUTATION, token);
   },
 
   removeToken() {
